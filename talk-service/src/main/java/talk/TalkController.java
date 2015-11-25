@@ -3,6 +3,8 @@ package talk;
 import com.mysema.query.BooleanBuilder;
 import com.mysema.query.types.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,13 +20,22 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @RestController
 @RequestMapping("/talk")
+@RefreshScope
 public class TalkController {
 
     private TalkRepository talkRepository;
 
+    @Value("${greeting}")
+    private String greeting;
+
     @Autowired
     public TalkController(TalkRepository talkRepository) {
         this.talkRepository = talkRepository;
+    }
+
+    @RequestMapping("/greeting")
+    String greet() {
+        return greeting;
     }
 
     @RequestMapping(method = GET)
