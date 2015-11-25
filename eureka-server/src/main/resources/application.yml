@@ -1,0 +1,17 @@
+server:
+  port: 8761
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    # we're running in 'single-node mode'
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname:}:${server.port}/eureka/
+  server:
+    waitTimeInMsWhenSyncEmpty: 0
+    # this prevents Eureka from assuming network issues when
+    # <85% of the registered services stop sending heartbeats
+    enableSelfPreservation: false

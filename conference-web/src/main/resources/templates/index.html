@@ -1,0 +1,14 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layout">
+<body>
+<div layout:fragment="content">
+    <h1>Webinars</h1>
+    <div class="list-group">
+        <a th:each="talk: ${talks}"
+           th:href="@{/talk/{id}(id=${talk.id})}" th:text="${talk.title + ' - ' + talk.speaker}" class="list-group-item">titel</a>
+    </div>
+</div>
+</body>
+</html>
